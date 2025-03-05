@@ -206,6 +206,11 @@ class ConfigurationServer {
                 type: 'object',
                 description: 'Server configuration in JSON format',
               },
+              allow_override: {
+                type: 'boolean',
+                description: 'Whether to allow overriding an existing server configuration with the same name (default: false)',
+                default: false,
+              },
             },
             required: ['client', 'server_name', 'json_config'],
           },
@@ -315,6 +320,7 @@ class ConfigurationServer {
           const client = validateClient(args.client);
           const serverName = args.server_name;
           const jsonConfig = args.json_config;
+          const allowOverride = args.allow_override === true; // Default to false if not provided
           
           if (typeof serverName !== 'string') {
             throw new McpError(ErrorCode.InvalidParams, 'server_name must be a string');
@@ -343,17 +349,27 @@ class ConfigurationServer {
             config.mcpServers = {};
           }
           
+          // Check if server with the same name already exists
+          const serverExists = config.mcpServers.hasOwnProperty(serverName);
+          if (serverExists && !allowOverride) {
+            throw new McpError(
+              ErrorCode.InvalidParams,
+              `Server '${serverName}' already exists in ${client} configuration. Set allow_override to true to update it.`
+            );
+          }
+          
           // Add or update the server configuration
           config.mcpServers[serverName] = jsonConfig;
           
           // Write the updated configuration
           await writeConfigFile(configPath, config);
           
+          const action = serverExists ? 'updated' : 'added';
           return {
             content: [
               {
                 type: 'text',
-                text: `Server '${serverName}' configuration added/updated in ${client} configuration`,
+                text: `Server '${serverName}' configuration ${action} in ${client} configuration`,
               },
             ],
           };
