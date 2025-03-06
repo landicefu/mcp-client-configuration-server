@@ -43,7 +43,7 @@ const getConfigPath = (client: ClientType): string => {
       case 'roo_code':
         return path.join(homeDir, 'Library', 'Application Support', 'Code', 'User', 'globalStorage', 'rooveterinaryinc.roo-cline', 'settings', 'cline_mcp_settings.json');
       case 'windsurf':
-        return path.join(homeDir, 'Library', 'Application Support', 'WindSurf', 'mcp_settings.json');
+        return path.join(homeDir, '.codeium', 'windsurf', 'mcp_config.json');
       case 'cursor':
         return path.join(homeDir, 'Library', 'Application Support', 'Cursor', 'mcp_settings.json');
       case 'claude':
@@ -272,7 +272,25 @@ class ConfigurationServer {
         case 'list_servers': {
           const client = validateClient(args.client);
           const configPath = getConfigPath(client);
-          const config = await readConfigFile(configPath);
+          
+          let config;
+          try {
+            config = await readConfigFile(configPath);
+          } catch (error) {
+            if (error instanceof McpError && error.code === ErrorCode.InternalError && error.message.includes('not found')) {
+              // Return empty array if configuration file doesn't exist
+              return {
+                content: [
+                  {
+                    type: 'text',
+                    text: '[]',
+                  },
+                ],
+              };
+            } else {
+              throw error;
+            }
+          }
           
           // Extract server names from the configuration
           let serverNames: string[] = [];
@@ -299,7 +317,17 @@ class ConfigurationServer {
           }
           
           const configPath = getConfigPath(client);
-          const config = await readConfigFile(configPath);
+          
+          let config;
+          try {
+            config = await readConfigFile(configPath);
+          } catch (error) {
+            if (error instanceof McpError && error.code === ErrorCode.InternalError && error.message.includes('not found')) {
+              throw new McpError(ErrorCode.InvalidParams, `Server '${serverName}' not found in ${client} configuration (configuration file does not exist)`);
+            } else {
+              throw error;
+            }
+          }
           
           // Check if the server exists
           if (!config.mcpServers || !config.mcpServers[serverName]) {
@@ -384,7 +412,25 @@ class ConfigurationServer {
           }
           
           const configPath = getConfigPath(client);
-          const config = await readConfigFile(configPath);
+          
+          let config;
+          try {
+            config = await readConfigFile(configPath);
+          } catch (error) {
+            if (error instanceof McpError && error.code === ErrorCode.InternalError && error.message.includes('not found')) {
+              // If the configuration file doesn't exist, there's nothing to remove
+              return {
+                content: [
+                  {
+                    type: 'text',
+                    text: `Server '${serverName}' not found in ${client} configuration (configuration file does not exist)`,
+                  },
+                ],
+              };
+            } else {
+              throw error;
+            }
+          }
           
           // Check if the server exists
           if (!config.mcpServers || !config.mcpServers[serverName]) {
