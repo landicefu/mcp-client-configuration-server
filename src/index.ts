@@ -23,7 +23,7 @@ const getConfigPath = (client: ClientType): string => {
     // Windows paths
     switch (client) {
       case 'cline':
-        return path.join(homeDir, 'AppData', 'Roaming', 'Claude', 'claude_desktop_config.json');
+        return path.join(homeDir, 'AppData', 'Roaming', 'Code', 'User', 'globalStorage', 'saoudrizwan.claude-dev', 'settings', 'cline_mcp_settings.json');
       case 'roo_code':
         return path.join(homeDir, 'AppData', 'Roaming', 'Code', 'User', 'globalStorage', 'rooveterinaryinc.roo-cline', 'settings', 'cline_mcp_settings.json');
       case 'windsurf':
