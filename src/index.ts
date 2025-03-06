@@ -39,7 +39,7 @@ const getConfigPath = (client: ClientType): string => {
     // macOS paths
     switch (client) {
       case 'cline':
-        return path.join(homeDir, 'Library', 'Application Support', 'Claude', 'claude_desktop_config.json');
+        return path.join(homeDir, 'Library', 'Application Support', 'Code', 'User', 'globalStorage', 'saoudrizwan.claude-dev', 'settings', 'cline_mcp_settings.json');
       case 'roo_code':
         return path.join(homeDir, 'Library', 'Application Support', 'Code', 'User', 'globalStorage', 'rooveterinaryinc.roo-cline', 'settings', 'cline_mcp_settings.json');
       case 'windsurf':
