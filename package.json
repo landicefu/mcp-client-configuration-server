@@ -1,21 +1,43 @@
 {
-  "name": "mcp-client-configuration-server",
+  "name": "@landicefu/mcp-client-configuration-server",
   "version": "0.1.0",
   "description": "MCP server for managing client configurations",
   "main": "build/index.js",
   "type": "module",
+  "bin": {
+    "mcp-client-configuration-server": "./build/index.js"
+  },
+  "files": [
+    "build/",
+    "src/",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
+    "prepare": "npm run build",
     "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
     "start": "node build/index.js",
-    "dev": "tsc -w"
+    "dev": "tsc -w",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublishOnly": "npm run build"
   },
   "keywords": [
     "mcp",
     "configuration",
-    "client"
+    "client",
+    "model-context-protocol",
+    "ai-tools"
   ],
-  "author": "",
+  "author": "Landice Fu <landice.fu@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/landicefu/mcp-client-configuration-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/landicefu/mcp-client-configuration-server/issues"
+  },
+  "homepage": "https://github.com/landicefu/mcp-client-configuration-server#readme",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.6.1"
   },
