@@ -9,8 +9,9 @@ This MCP server helps manage configurations for different MCP clients. It provid
 - **Cline**: Claude-powered coding assistant
 - **Roo Code**: Code editor with AI capabilities
 - **WindSurf**: AI-powered browser
-- **Cursor**: AI-powered code editor
 - **Claude app**: Desktop application for Claude AI
+
+> **Note:** Cursor is no longer supported as it doesn't use a standard configuration file for MCP settings. Cursor appears to store its MCP configuration in a way we can't easily modify, making it incompatible with this configuration server's file-based approach.
 
 ## Tools
 
@@ -19,7 +20,7 @@ This MCP server helps manage configurations for different MCP clients. It provid
 Retrieves the path to the configuration file for a specified client.
 
 **Parameters:**
-- `client` (required): The client name (cline, roo_code, windsurf, cursor, claude)
+- `client` (required): The client name (cline, roo_code, windsurf, claude)
 
 **Returns:**
 - The absolute path to the configuration file
@@ -29,7 +30,7 @@ Retrieves the path to the configuration file for a specified client.
 Retrieves the entire configuration for a specified client.
 
 **Parameters:**
-- `client` (required): The client name (cline, roo_code, windsurf, cursor, claude)
+- `client` (required): The client name (cline, roo_code, windsurf, claude)
 
 **Returns:**
 - The complete JSON configuration from the client's configuration file
@@ -39,7 +40,7 @@ Retrieves the entire configuration for a specified client.
 Lists all server names configured in a specified client's configuration.
 
 **Parameters:**
-- `client` (required): The client name (cline, roo_code, windsurf, cursor, claude)
+- `client` (required): The client name (cline, roo_code, windsurf, claude)
 
 **Returns:**
 - An array of server names
@@ -49,7 +50,7 @@ Lists all server names configured in a specified client's configuration.
 Retrieves the configuration for a specific server from a client's configuration.
 
 **Parameters:**
-- `client` (required): The client name (cline, roo_code, windsurf, cursor, claude)
+- `client` (required): The client name (cline, roo_code, windsurf, claude)
 - `server_name` (required): The name of the server to retrieve
 
 **Returns:**
@@ -60,7 +61,7 @@ Retrieves the configuration for a specific server from a client's configuration.
 Adds or updates a server configuration in a client's configuration file.
 
 **Parameters:**
-- `client` (required): The client name (cline, roo_code, windsurf, cursor, claude)
+- `client` (required): The client name (cline, roo_code, windsurf, claude)
 - `server_name` (required): The name of the server to add or update
 - `json_config` (required): The server configuration in JSON format
 
@@ -83,7 +84,7 @@ Adds or updates a server configuration in a client's configuration file.
 Removes a server configuration from a client's configuration file.
 
 **Parameters:**
-- `client` (required): The client name (cline, roo_code, windsurf, cursor, claude)
+- `client` (required): The client name (cline, roo_code, windsurf, claude)
 - `server_name` (required): The name of the server to remove
 
 **Returns:**

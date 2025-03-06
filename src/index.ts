@@ -12,7 +12,7 @@ import * as path from 'path';
 import * as os from 'os';
 
 // Supported client types
-type ClientType = 'cline' | 'roo_code' | 'windsurf' | 'cursor' | 'claude';
+type ClientType = 'cline' | 'roo_code' | 'windsurf' | 'claude';
 
 // Configuration paths for different clients on different platforms
 const getConfigPath = (client: ClientType): string => {
@@ -28,8 +28,6 @@ const getConfigPath = (client: ClientType): string => {
         return path.join(homeDir, 'AppData', 'Roaming', 'Code', 'User', 'globalStorage', 'rooveterinaryinc.roo-cline', 'settings', 'cline_mcp_settings.json');
       case 'windsurf':
         return path.join(homeDir, 'AppData', 'Roaming', 'WindSurf', 'mcp_settings.json');
-      case 'cursor':
-        return path.join(homeDir, 'AppData', 'Roaming', 'Cursor', 'mcp_settings.json');
       case 'claude':
         return path.join(homeDir, 'AppData', 'Roaming', 'Claude', 'claude_desktop_config.json');
       default:
@@ -44,8 +42,6 @@ const getConfigPath = (client: ClientType): string => {
         return path.join(homeDir, 'Library', 'Application Support', 'Code', 'User', 'globalStorage', 'rooveterinaryinc.roo-cline', 'settings', 'cline_mcp_settings.json');
       case 'windsurf':
         return path.join(homeDir, '.codeium', 'windsurf', 'mcp_config.json');
-      case 'cursor':
-        return path.join(homeDir, 'Library', 'Application Support', 'Cursor', 'mcp_settings.json');
       case 'claude':
         return path.join(homeDir, 'Library', 'Application Support', 'Claude', 'claude_desktop_config.json');
       default:
@@ -62,7 +58,7 @@ const validateClient = (client: unknown): ClientType => {
     throw new McpError(ErrorCode.InvalidParams, 'Client must be a string');
   }
   
-  const validClients: ClientType[] = ['cline', 'roo_code', 'windsurf', 'cursor', 'claude'];
+  const validClients: ClientType[] = ['cline', 'roo_code', 'windsurf', 'claude'];
   if (!validClients.includes(client as ClientType)) {
     throw new McpError(ErrorCode.InvalidParams, `Invalid client: ${client}. Must be one of: ${validClients.join(', ')}`);
   }
@@ -136,7 +132,7 @@ class ConfigurationServer {
             properties: {
               client: {
                 type: 'string',
-                description: 'Client name (cline, roo_code, windsurf, cursor, claude)',
+                description: 'Client name (cline, roo_code, windsurf, claude)',
               },
             },
             required: ['client'],
@@ -150,7 +146,7 @@ class ConfigurationServer {
             properties: {
               client: {
                 type: 'string',
-                description: 'Client name (cline, roo_code, windsurf, cursor, claude)',
+                description: 'Client name (cline, roo_code, windsurf, claude)',
               },
             },
             required: ['client'],
@@ -164,7 +160,7 @@ class ConfigurationServer {
             properties: {
               client: {
                 type: 'string',
-                description: 'Client name (cline, roo_code, windsurf, cursor, claude)',
+                description: 'Client name (cline, roo_code, windsurf, claude)',
               },
             },
             required: ['client'],
@@ -178,7 +174,7 @@ class ConfigurationServer {
             properties: {
               client: {
                 type: 'string',
-                description: 'Client name (cline, roo_code, windsurf, cursor, claude)',
+                description: 'Client name (cline, roo_code, windsurf, claude)',
               },
               server_name: {
                 type: 'string',
@@ -196,7 +192,7 @@ class ConfigurationServer {
             properties: {
               client: {
                 type: 'string',
-                description: 'Client name (cline, roo_code, windsurf, cursor, claude)',
+                description: 'Client name (cline, roo_code, windsurf, claude)',
               },
               server_name: {
                 type: 'string',
@@ -223,7 +219,7 @@ class ConfigurationServer {
             properties: {
               client: {
                 type: 'string',
-                description: 'Client name (cline, roo_code, windsurf, cursor, claude)',
+                description: 'Client name (cline, roo_code, windsurf, claude)',
               },
               server_name: {
                 type: 'string',
