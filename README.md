@@ -1,10 +1,10 @@
-# MCP Client Configuration Server
-
-This MCP server helps manage configurations for different MCP clients. It provides tools to retrieve, list, add, and remove server configurations from client configuration files. The server automatically detects the appropriate configuration file path based on the operating system (Windows or macOS) and the specified client.
-
 <a href="https://glama.ai/mcp/servers/aa10ltj5b6">
   <img width="380" height="200" src="https://glama.ai/mcp/servers/aa10ltj5b6/badge" alt="Client Configuration Server MCP server" />
 </a>
+
+# MCP Client Configuration Server
+
+This MCP server helps manage configurations for different MCP clients. It provides tools to retrieve, list, add, and remove server configurations from client configuration files. The server automatically detects the appropriate configuration file path based on the operating system (Windows or macOS) and the specified client.
 
 ## Installation
 
