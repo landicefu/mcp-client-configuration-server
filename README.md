@@ -4,10 +4,21 @@
 
 # MCP Client Configuration Server
 
+[![smithery badge](https://smithery.ai/badge/@landicefu/mcp-client-configuration-server)](https://smithery.ai/server/@landicefu/mcp-client-configuration-server)
+
 This MCP server helps manage configurations for different MCP clients. It provides tools to retrieve, list, add, and remove server configurations from client configuration files. The server automatically detects the appropriate configuration file path based on the operating system (Windows or macOS) and the specified client.
 
 ## Installation
 
+### Installing via Smithery
+
+To install Client Configuration Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@landicefu/mcp-client-configuration-server):
+
+```bash
+npx -y @smithery/cli install @landicefu/mcp-client-configuration-server --client claude
+```
+
+### Manual Installation
 ```bash
 # Install from npm
 npm install -g @landicefu/mcp-client-configuration-server
